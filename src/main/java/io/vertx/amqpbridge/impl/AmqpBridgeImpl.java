@@ -176,6 +176,16 @@ public class AmqpBridgeImpl implements AmqpBridge {
 
     return new AmqpConsumerImpl(this, connection, amqpAddress);
   }
+  
+  @SuppressWarnings("unchecked")
+  @Override
+  public MessageConsumer<JsonObject> createBrosweOnlyConsumer(String amqpAddress) throws IllegalStateException {
+      if (!started.get()) {
+          throw new IllegalStateException("Bridge was not successfully started");
+      }
+
+      return new AmqpBrowseConsumerImpl(this, connection, amqpAddress);
+  }
 
   @SuppressWarnings("unchecked")
   @Override
