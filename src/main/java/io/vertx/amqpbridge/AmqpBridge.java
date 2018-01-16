@@ -97,6 +97,18 @@ public interface AmqpBridge {
   <T> MessageConsumer<T> createConsumer(String amqpAddress) throws IllegalStateException;
 
   /**
+   * Creates a Browse only consumer on the given AMQP address.
+   *
+   * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start methods. The bridge MUST be successfully started before the method is called.
+   *
+   * @param amqpAddress the address to consume from
+   * @return the consumer
+   * @throws IllegalStateException if the bridge was not started or the method is invoked on a thread other than the bridge Context thread, as used in the result handler callback from the start
+   *             methods.
+   */
+  <T> MessageConsumer<T> createBrosweOnlyConsumer(String amqpAddress) throws IllegalStateException;
+
+  /**
    * Creates a producer to the given AMQP address.
    *
    * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start
