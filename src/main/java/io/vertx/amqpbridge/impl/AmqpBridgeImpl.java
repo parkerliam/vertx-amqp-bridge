@@ -331,7 +331,7 @@ public class AmqpBridgeImpl implements AmqpBridge {
     return ((ContextInternal) bridgeContext).nettyEventLoop().inEventLoop();
   }
 
-  void runOnContext(boolean immediateIfOnContext, Handler<Void> action) {
+  public void runOnContext(boolean immediateIfOnContext, Handler<Void> action) {
     if (immediateIfOnContext && onContextEventLoop()) {
       action.handle(null);
     } else {
